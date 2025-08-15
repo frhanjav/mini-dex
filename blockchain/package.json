@@ -1,0 +1,29 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "hardhat compile",
+    "deploy:local": "hardhat run scripts/deploy-faucet.ts --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy-faucet.ts --network sepolia",
+    "add-liquidity:sepolia": "hardhat run scripts/add-liquidity.ts --network sepolia",
+    "verify:sepolia": "hardhat run scripts/verify.ts --network sepolia",
+    "verify:tom": "hardhat verify --network sepolia 0xFda6691C96F1b48819EE16A782aAecC720237E2b \"TomTheCat\" \"TOM\" \"10000000000000000000000\"",
+    "verify:ben": "hardhat verify --network sepolia 0x16D3f4D3631E275b4D3c89Fa80DcCdd360E5d3Bc \"BenTheDog\" \"BEN\" \"10000000000000000000000\"",
+    "verify:dex": "hardhat verify --network sepolia 0x5Ed6038971F5a7Cd05a5BC2b37a2eFa7547eeB8B \"0xFda6691C96F1b48819EE16A782aAecC720237E2b\" \"0x16D3f4D3631E275b4D3c89Fa80DcCdd360E5d3Bc\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "hardhat": "^2.26.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "dotenv": "^17.2.1"
+  }
+}
