@@ -75,16 +75,6 @@ export const SwapInterface = () => {
     }
   }, [dexContract, amountIn, tokenIn]);
 
-  const fetchTokenSymbols = useCallback(async () => {
-    const updatedTokenInfo = [
-      { address: contractAddresses.tokenA, symbol: "TOM", name: "TomTheCat" },
-      { address: contractAddresses.tokenB, symbol: "BEN", name: "BenTheDog" },
-    ];
-
-    setTokenInfo(updatedTokenInfo);
-    setTokenIn(updatedTokenInfo[0]);
-    setTokenOut(updatedTokenInfo[1]);
-  }, []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -94,11 +84,7 @@ export const SwapInterface = () => {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [dexContract, amountIn, tokenIn.address]);
-
-  useEffect(() => {
-    fetchTokenSymbols();
-  }, []);
+  }, [dexContract, amountIn, tokenIn.address, fetchPrice]);
 
   useEffect(() => {
     if (walletProvider && isConnected) {
@@ -182,26 +168,27 @@ export const SwapInterface = () => {
       setTxStatus("success");
       setAmountIn("");
       setAmountOut("");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Swap error:", err);
       let errorMessage = "Swap failed.";
 
-      if (err.reason) {
-        errorMessage = err.reason;
-      } else if (err.message) {
-        if (err.message.includes("InsufficientAmountOut")) {
+      const error = err as Error & { reason?: string; message?: string };
+      if (error.reason) {
+        errorMessage = error.reason;
+      } else if (error.message) {
+        if (error.message.includes("InsufficientAmountOut")) {
           errorMessage =
             "Insufficient output amount. Try increasing slippage tolerance.";
-        } else if (err.message.includes("InsufficientLiquidity")) {
+        } else if (error.message.includes("InsufficientLiquidity")) {
           errorMessage = "Insufficient liquidity in the pool.";
-        } else if (err.message.includes("DeadlineExceeded")) {
+        } else if (error.message.includes("DeadlineExceeded")) {
           errorMessage = "Transaction deadline exceeded.";
-        } else if (err.message.includes("ZeroAmount")) {
+        } else if (error.message.includes("ZeroAmount")) {
           errorMessage = "Amount cannot be zero.";
-        } else if (err.message.includes("user rejected")) {
+        } else if (error.message.includes("user rejected")) {
           errorMessage = "Transaction was rejected by user.";
         } else {
-          errorMessage = err.message;
+          errorMessage = error.message;
         }
       }
 

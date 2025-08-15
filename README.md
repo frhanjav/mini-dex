@@ -1,8 +1,8 @@
 # Mini DEX
 
-A full-stack decentralized exchange (DEX) built with Hardhat and Next.js, featuring token faucets and AMM swapping.
+**A full-stack decentralized exchange (DEX) built with Hardhat and Next.js, featuring token faucets and AMM swapping.**
 
-![Mini DEX Interface](./assets/homepage.png)
+<img src="https://media.frhn.me/homepage.png" alt="Mini DEX Interface" style="max-width:300px; width:100%; display:block; margin:auto;" />
 
 ## Features
 

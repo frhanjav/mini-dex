@@ -46,7 +46,9 @@ npm run deploy:local
 
 ### 3. Start Blockscout Explorer (Optional)
 
-![Blockscout Explorer](../assets/blockscout.png)
+<img src="https://media.frhn.me/blockscout.png" alt="Blockscout Explorer" style="max-width:500px; width:100%; display:block; margin:auto;" />
+
+<br />
 
 ```bash
 git clone https://github.com/blockscout/blockscout.git

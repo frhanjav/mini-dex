@@ -112,17 +112,18 @@ export const TokenFaucet = () => {
         fetchBalancesAndCooldowns();
         setTxStatus((prev) => ({ ...prev, [tokenType]: "idle" }));
       }, 2000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(`${tokenType} faucet error:`, err);
       let errorMessage = `${tokenType} faucet failed.`;
 
-      if (err.reason || err.message) {
-        if (err.message.includes("Faucet cooldown not met")) {
+      const error = err as Error & { reason?: string; message?: string };
+      if (error.reason || error.message) {
+        if (error.message && error.message.includes("Faucet cooldown not met")) {
           errorMessage = `${tokenType} faucet cooldown not met. Try again later.`;
-        } else if (err.message.includes("user rejected")) {
+        } else if (error.message && error.message.includes("user rejected")) {
           errorMessage = "Transaction was rejected by user.";
         } else {
-          errorMessage = err.reason || err.message;
+          errorMessage = error.reason || error.message || errorMessage;
         }
       }
 

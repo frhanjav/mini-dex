@@ -89,9 +89,10 @@ export const TokenManager = () => {
       }
 
       alert(`Minted 1000 ${symbol} tokens!`);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Mint error:", err);
-      alert(`Mint failed: ${err.message}`);
+      const error = err as Error & { message?: string };
+      alert(`Mint failed: ${error.message || "Unknown error"}`);
     } finally {
       setLoading(false);
     }

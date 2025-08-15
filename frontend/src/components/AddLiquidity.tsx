@@ -119,21 +119,22 @@ export const AddLiquidity = () => {
       setTxStatus("success");
       setAmountA("");
       setAmountB("");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Add liquidity error:", err);
       let errorMessage = "Add liquidity failed.";
 
-      if (err.reason) {
-        errorMessage = err.reason;
-      } else if (err.message) {
-        if (err.message.includes("ZeroAmount")) {
+      const error = err as Error & { reason?: string; message?: string };
+      if (error.reason) {
+        errorMessage = error.reason;
+      } else if (error.message) {
+        if (error.message.includes("ZeroAmount")) {
           errorMessage = "Amount cannot be zero.";
-        } else if (err.message.includes("user rejected")) {
+        } else if (error.message.includes("user rejected")) {
           errorMessage = "Transaction was rejected by user.";
-        } else if (err.message.includes("insufficient funds")) {
+        } else if (error.message.includes("insufficient funds")) {
           errorMessage = "Insufficient token balance.";
         } else {
-          errorMessage = err.message;
+          errorMessage = error.message;
         }
       }
 
