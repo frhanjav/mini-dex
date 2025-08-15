@@ -1,0 +1,74 @@
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+@import "tailwindcss";
+
+:root {
+  --background: #111827;
+  --foreground: #f9fafb;
+
+  --w3m-accent-color: #667eea !important;
+  --w3m-accent-fill-color: #ffffff !important;
+  --wui-color-accent-100: #667eea !important;
+  --wui-accent-color: #667eea !important;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+appkit-button {
+  display: flex !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+appkit-button button,
+appkit-button .w3m-button,
+appkit-button [data-testid="appkit-button"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 24px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+}
+
+appkit-button button *,
+appkit-button .w3m-button *,
+appkit-button [data-testid="appkit-button"] *,
+appkit-button span,
+appkit-button div,
+appkit-button w3m-button *,
+appkit-button wui-button * {
+  color: white !important;
+  text-shadow: none !important;
+  fill: white !important;
+}
+
+appkit-button button:hover,
+appkit-button .w3m-button:hover,
+appkit-button [data-testid="appkit-button"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+}
